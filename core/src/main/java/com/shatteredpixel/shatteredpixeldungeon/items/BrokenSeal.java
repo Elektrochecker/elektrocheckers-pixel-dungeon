@@ -3,7 +3,7 @@
  * Copyright (C) 2012-2015 Oleg Dolya
  *
  * Shattered Pixel Dungeon
- * Copyright (C) 2014-2023 Evan Debenham
+ * Copyright (C) 2014-2024 Evan Debenham
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,6 +43,7 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class BrokenSeal extends Item {
 
@@ -62,6 +63,21 @@ public class BrokenSeal extends Item {
 	}
 
 	private Armor.Glyph glyph;
+
+	public boolean canTransferGlyph(){
+		if (glyph == null){
+			return false;
+		}
+		if (Dungeon.hero.pointsInTalent(Talent.RUNIC_TRANSFERENCE) == 2){
+			return true;
+		} else if (Dungeon.hero.pointsInTalent(Talent.RUNIC_TRANSFERENCE) == 1
+			&& (Arrays.asList(Armor.Glyph.common).contains(glyph.getClass())
+				|| Arrays.asList(Armor.Glyph.uncommon).contains(glyph.getClass()))){
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	public Armor.Glyph getGlyph(){
 		return glyph;
