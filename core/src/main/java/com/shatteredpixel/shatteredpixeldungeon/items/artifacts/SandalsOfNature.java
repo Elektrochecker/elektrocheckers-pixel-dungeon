@@ -41,6 +41,7 @@ import com.shatteredpixel.shatteredpixeldungeon.plants.Blindweed;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Earthroot;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Fadeleaf;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Firebloom;
+import com.shatteredpixel.shatteredpixeldungeon.plants.Ghostbulb;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Icecap;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Mageroyal;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Plant;
@@ -50,6 +51,7 @@ import com.shatteredpixel.shatteredpixeldungeon.plants.Starflower;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Stormvine;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Sungrass;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Swiftthistle;
+import com.shatteredpixel.shatteredpixeldungeon.plants.Voidpearl;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.CellSelector;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
@@ -100,6 +102,8 @@ public class SandalsOfNature extends Artifact {
 		seedColors.put(Starflower.Seed.class,   0x404040);
 		seedColors.put(Fadeleaf.Seed.class,     0x919999);
 		seedColors.put(Blindweed.Seed.class,    0XD9D9D9);
+		seedColors.put(Voidpearl.Seed.class,    0x87138f);
+		seedColors.put(Ghostbulb.Seed.class,    0Xdcebae);
 	}
 
 	private static final HashMap<Class<? extends Plant.Seed>, Integer> seedChargeReqs = new HashMap<>();
@@ -116,6 +120,8 @@ public class SandalsOfNature extends Artifact {
 		seedChargeReqs.put(Starflower.Seed.class,   40);
 		seedChargeReqs.put(Fadeleaf.Seed.class,     12);
 		seedChargeReqs.put(Blindweed.Seed.class,    12);
+		seedChargeReqs.put(Voidpearl.Seed.class,    100);
+		seedChargeReqs.put(Ghostbulb.Seed.class,    40);
 	}
 
 	@Override

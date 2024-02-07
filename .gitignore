@@ -18,3 +18,9 @@ local.properties
 #intellij project files
 *.iml
 *.idea
+
+#windows shortcut files
+*.lnk
+
+#git rejects
+*.rej
