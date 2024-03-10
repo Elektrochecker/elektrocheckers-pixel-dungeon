@@ -59,7 +59,7 @@ public class vModded_Changes {
 			"_-_fixed some spelling mistakes in item descriptions."
 		));
 
-		changes.addButton( new ChangeButton(new Image(Assets.Environment.TILES_CITY, 11*16+3, 5*16+2, 10, 12), "Rune table",
+		changes.addButton( new ChangeButton(new Image(Assets.Environment.TILES_CITY, 3, 16*16+2, 10, 12), "Rune table",
 				"The rune table spawns in library rooms and lets the player perform alchemy."
 		));
 

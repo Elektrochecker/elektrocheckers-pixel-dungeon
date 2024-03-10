@@ -14,7 +14,7 @@ allprojects {
 
     ext {
         appName = 'Elektrocheckers Pixel Dungeon'
-        appPackageName = 'com.elektrochecker.pixeldungeonalchemistmod'
+        appPackageName = 'com.elektrochecker.shatteredpixeldungeonT'
 
         appVersionCode = 768
         appVersionName = '2.3.2T3.3'
