@@ -18,22 +18,27 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes;
 
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Invisibility;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 
-public class Partial extends AncientRune {
+public class ContravariantAncientRune extends AncientRune {
 	
 	{
-		image = ItemSpriteSheet.ANCIENTRUNE_PARTIAL;
+		image = ItemSpriteSheet.ANCIENTRUNE_CONTRAVARIANT;
 	}
 	
 	@Override
 	protected void onCast(Hero hero) {
+
+		detach( curUser.belongings.backpack );
+		updateQuickslot();
+		Invisibility.dispel();
+		hero.spendAndNext( 1f );
 	}
 	
 	@Override
 	public int value() {
-		//prices of ingredients, divided by output quantity, rounds down
 		return 250;
 	}
 }

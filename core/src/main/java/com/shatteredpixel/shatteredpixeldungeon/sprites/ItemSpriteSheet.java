@@ -769,8 +769,8 @@ public class ItemSpriteSheet {
 	}
 
 	private static final int ANCIENTRUNES 				= xy(1, 33);  //16 slots
-	public static final int ANCIENTRUNE_CONTRAVARIANT  	= ANCIENTRUNES+0;
-	public static final int ANCIENTRUNE_COVARIANT  		= ANCIENTRUNES+1;
+	public static final int ANCIENTRUNE_COVARIANT  		= ANCIENTRUNES+0;
+	public static final int ANCIENTRUNE_CONTRAVARIANT  	= ANCIENTRUNES+1;
 	public static final int ANCIENTRUNE_INVARIANT  		= ANCIENTRUNES+2;
 	public static final int ANCIENTRUNE_NABLA  			= ANCIENTRUNES+3;
 	public static final int ANCIENTRUNE_FIELD  			= ANCIENTRUNES+4;

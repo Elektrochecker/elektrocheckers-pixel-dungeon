@@ -18,10 +18,11 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes;
 
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Invisibility;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 
-public class Covariant extends AncientRune {
+public class CovariantAncientRune extends AncientRune {
 	
 	{
 		image = ItemSpriteSheet.ANCIENTRUNE_COVARIANT;
@@ -29,11 +30,15 @@ public class Covariant extends AncientRune {
 	
 	@Override
 	protected void onCast(Hero hero) {
+
+		detach( curUser.belongings.backpack );
+		updateQuickslot();
+		Invisibility.dispel();
+		hero.spendAndNext( 1f );
 	}
 	
 	@Override
 	public int value() {
-		//prices of ingredients, divided by output quantity, rounds down
 		return 250;
 	}
 }

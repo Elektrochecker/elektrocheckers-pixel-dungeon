@@ -18,40 +18,62 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.items.spells;
 
+import com.shatteredpixel.shatteredpixeldungeon.Badges;
+import com.shatteredpixel.shatteredpixeldungeon.Statistics;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Degrade;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
-import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.Contravariant;
-import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.Covariant;
+import com.shatteredpixel.shatteredpixeldungeon.items.Item;
+import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.ContravariantAncientRune;
+import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.CovariantAncientRune;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 
 //should be a spell
-public class Invariant extends Spell {
-	
+public class InvariantAncientRune extends Spell {
+
 	{
 		image = ItemSpriteSheet.ANCIENTRUNE_INVARIANT;
 	}
-	
+
 	@Override
 	protected void onCast(Hero hero) {
-		//upgrade +3
+		ScrollOfUpgrade scroll = new ScrollOfUpgrade() {
+			@Override
+			protected void onItemSelected(Item item) {
+				upgrade(curUser);
+				Degrade.detach(curUser, Degrade.class);
+
+				item.upgrade();
+				item.upgrade();
+				item.upgrade();
+
+				Badges.validateItemLevelAquired(item);
+				Statistics.upgradesUsed += 3;
+				Badges.validateMageUnlock();
+			}
+		};
+		scroll.execute(hero);
+
+		detach(curUser.belongings.backpack);
+		updateQuickslot();
 	}
-	
+
 	@Override
 	public int value() {
-		//prices of ingredients, divided by output quantity, rounds down
 		return 250;
 	}
 
 	public static class Recipe extends com.shatteredpixel.shatteredpixeldungeon.items.Recipe.SimpleRecipe {
-		
+
 		{
-			inputs =  new Class[]{Contravariant.class, Covariant.class};
-			inQuantity = new int[]{1, 1};
-			
+			inputs = new Class[] { ContravariantAncientRune.class, CovariantAncientRune.class };
+			inQuantity = new int[] { 1, 1 };
+
 			cost = 8;
-			
-			output = Invariant.class;
+
+			output = InvariantAncientRune.class;
 			outQuantity = 1;
 		}
-		
+
 	}
 }
