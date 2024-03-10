@@ -19,24 +19,29 @@
 package com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes;
 
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Invisibility;
-import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.shatteredpixeldungeon.items.Item;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.InvariantAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 
-public class CovariantAncientRune extends AncientRune {
-	
+public class CovariantAncientRune extends AncientRuneInventory {
+
 	{
 		image = ItemSpriteSheet.ANCIENTRUNE_COVARIANT;
 	}
-	
-	@Override
-	protected void onCast(Hero hero) {
 
-		detach( curUser.belongings.backpack );
-		updateQuickslot();
-		Invisibility.dispel();
-		hero.spendAndNext( 1f );
+	@Override
+	protected boolean usableOnItem(Item item) {
+		return (item instanceof AncientRune || item instanceof AncientRuneInventory || item instanceof InvariantAncientRune) && !(item == this);
 	}
-	
+
+	@Override
+	protected void onItemSelected(Item item) {
+		Item oldrune = item.detach(curUser.belongings.backpack);
+
+		new ContravariantAncientRune().collect();
+		new CovariantAncientRune().collect();
+	}
+
 	@Override
 	public int value() {
 		return 250;
