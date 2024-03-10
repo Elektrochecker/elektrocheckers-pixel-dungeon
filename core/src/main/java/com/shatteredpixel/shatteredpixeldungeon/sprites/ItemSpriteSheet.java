@@ -768,6 +768,22 @@ public class ItemSpriteSheet {
 		assignItemRect(HALLS_PAGE,  10, 11);
 	}
 
+	private static final int ANCIENTRUNES 				= xy(1, 33);  //16 slots
+	public static final int ANCIENTRUNE_CONTRAVARIANT  	= ANCIENTRUNES+0;
+	public static final int ANCIENTRUNE_COVARIANT  		= ANCIENTRUNES+1;
+	public static final int ANCIENTRUNE_INVARIANT  		= ANCIENTRUNES+2;
+	public static final int ANCIENTRUNE_NABLA  			= ANCIENTRUNES+3;
+	public static final int ANCIENTRUNE_FIELD  			= ANCIENTRUNES+4;
+	public static final int ANCIENTRUNE_PARTIAL  		= ANCIENTRUNES+5;
+	static{
+		assignItemRect(ANCIENTRUNE_CONTRAVARIANT,  16, 16);
+		assignItemRect(ANCIENTRUNE_COVARIANT,   16, 16);
+		assignItemRect(ANCIENTRUNE_INVARIANT,  16, 16);
+		assignItemRect(ANCIENTRUNE_NABLA, 16, 16);
+		assignItemRect(ANCIENTRUNE_FIELD,  16, 16);
+		assignItemRect(ANCIENTRUNE_PARTIAL,   16, 16);
+	}
+
 	//for smaller 8x8 icons that often accompany an item sprite
 	public static class Icons {
 
