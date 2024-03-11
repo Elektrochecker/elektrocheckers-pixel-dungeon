@@ -31,7 +31,13 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Invisibility;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.LockedFloor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Ooze;
+import com.shatteredpixel.shatteredpixeldungeon.effects.Flare;
 import com.shatteredpixel.shatteredpixeldungeon.effects.FloatingText;
+import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.ContravariantAncientRune;
+import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.CovariantAncientRune;
+import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.FieldOperatorAncientRune;
+import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.NablaAncientRune;
+import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.PartialAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DriedRose;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.SkeletonKey;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.GooBlob;
@@ -297,6 +303,28 @@ public class Goo extends Mob {
 				ofs = PathFinder.NEIGHBOURS8[Random.Int(8)];
 			} while (!Dungeon.level.passable[pos + ofs]);
 			Dungeon.level.drop( new GooBlob(), pos + ofs ).sprite.drop( pos );
+		}
+
+		// drop ancient rune
+		new Flare( 3, 32 ).color( 0xf7cb1b, true ).show( this.sprite, 2f );
+		int runeNum = Random.chances(new float[] { 1, 1, 2, 2, 2 });
+
+		switch (runeNum) {
+			case 0:
+				Dungeon.level.drop(new ContravariantAncientRune(), pos);
+				break;
+			case 1:
+				Dungeon.level.drop(new CovariantAncientRune(), pos);
+				break;
+			case 2:
+				Dungeon.level.drop(new NablaAncientRune(), pos);
+				break;
+			case 3:
+				Dungeon.level.drop(new FieldOperatorAncientRune(), pos);
+				break;
+			case 4:
+				Dungeon.level.drop(new PartialAncientRune(), pos);
+				break;
 		}
 		
 		Badges.validateBossSlain();

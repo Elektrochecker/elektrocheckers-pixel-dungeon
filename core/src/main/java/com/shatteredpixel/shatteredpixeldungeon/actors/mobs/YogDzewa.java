@@ -42,10 +42,16 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Vertigo;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Sheep;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Beam;
 import com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter;
+import com.shatteredpixel.shatteredpixeldungeon.effects.Flare;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Pushing;
 import com.shatteredpixel.shatteredpixeldungeon.effects.TargetedCell;
 import com.shatteredpixel.shatteredpixeldungeon.effects.particles.PurpleParticle;
 import com.shatteredpixel.shatteredpixeldungeon.effects.particles.ShadowParticle;
+import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.ContravariantAncientRune;
+import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.CovariantAncientRune;
+import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.FieldOperatorAncientRune;
+import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.NablaAncientRune;
+import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.PartialAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DriedRose;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica;
@@ -523,6 +529,28 @@ public class YogDzewa extends Mob {
 		updateVisibility(Dungeon.level);
 
 		GameScene.bossSlain();
+
+		// drop ancient rune
+		new Flare( 3, 32 ).color( 0xf7cb1b, true ).show( this.sprite, 2f );
+		int runeNum = Random.chances(new float[] { 1, 1, 2, 2, 2 });
+
+		switch (runeNum) {
+			case 0:
+				Dungeon.level.drop(new ContravariantAncientRune(), pos);
+				break;
+			case 1:
+				Dungeon.level.drop(new CovariantAncientRune(), pos);
+				break;
+			case 2:
+				Dungeon.level.drop(new NablaAncientRune(), pos);
+				break;
+			case 3:
+				Dungeon.level.drop(new FieldOperatorAncientRune(), pos);
+				break;
+			case 4:
+				Dungeon.level.drop(new PartialAncientRune(), pos);
+				break;
+		}
 
 		if (Dungeon.isChallenged(Challenges.STRONGER_BOSSES) && Statistics.spawnersAlive == 4){
 			Badges.validateBossChallengeCompleted();
