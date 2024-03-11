@@ -41,6 +41,7 @@ public class ScrollOfTrauma extends Scroll {
 
 	@Override
 	public void doRead() {
+		detach(curUser.belongings.backpack);
 
 		new Flare(5, 32).color(0xCC00CC, true).show(curUser.sprite, 2f);
 		Sample.INSTANCE.play(Assets.Sounds.READ);

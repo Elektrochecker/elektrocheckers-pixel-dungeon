@@ -40,7 +40,9 @@ public class ScrollOfDamnation extends ExoticScroll {
 	
 	@Override
 	public void doRead() {
-		new Flare( 5, 32 ).color( 0xCC00CC, true ).show( curUser.sprite, 2f );
+		detach(curUser.belongings.backpack);
+
+		new Flare( 5, 32 ).color( 0x2b1111, false ).show( curUser.sprite, 2f );
 		Sample.INSTANCE.play( Assets.Sounds.READ );
 
 		for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
