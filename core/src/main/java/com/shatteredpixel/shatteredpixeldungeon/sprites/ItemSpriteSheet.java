@@ -622,7 +622,8 @@ public class ItemSpriteSheet {
 	
 	                                                                                    //16 free slots
 	
-	private static final int SPELLS         =                               xy(1, 27);  //16 slots
+	private static final int SPELLS         = xy(1, 27);  //16 slots
+	private static final int MORE_SPELLS    = xy(1, 34);  //16 slots
 	public static final int MAGIC_PORTER    = SPELLS+0;
 	public static final int PHASE_SHIFT     = SPELLS+1;
 	public static final int TELE_GRAB       = SPELLS+2;
@@ -639,6 +640,8 @@ public class ItemSpriteSheet {
 	public static final int ALCHEMIZE       = SPELLS+13;
 	public static final int RECYCLE         = SPELLS+14;
 	public static final int PRISMATIC_IMAGE = SPELLS+15;
+
+	public static final int GREATER_TRANSMUTATION = MORE_SPELLS+0;
 	static{
 		assignItemRect(MAGIC_PORTER,    12, 11);
 		assignItemRect(PHASE_SHIFT,     12, 11);

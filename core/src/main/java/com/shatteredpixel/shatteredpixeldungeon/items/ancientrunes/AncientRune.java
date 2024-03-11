@@ -36,6 +36,9 @@ import java.util.ArrayList;
 public abstract class AncientRune extends Item {
 	
 	public static final String AC_CAST = "CAST";
+
+	//must change this and drop code in goo, yog and greatertransmutation when a new rune is added
+	public static final float[] probabilities = { 1, 1, 2, 2, 2 };
 	
 	{
 		stackable = false;

@@ -33,6 +33,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.LockedFloor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Ooze;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Flare;
 import com.shatteredpixel.shatteredpixeldungeon.effects.FloatingText;
+import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.AncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.ContravariantAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.CovariantAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.FieldOperatorAncientRune;
@@ -307,7 +308,7 @@ public class Goo extends Mob {
 
 		// drop ancient rune
 		new Flare( 3, 32 ).color( 0xf7cb1b, true ).show( this.sprite, 2f );
-		int runeNum = Random.chances(new float[] { 1, 1, 2, 2, 2 });
+		int runeNum = Random.chances(AncientRune.probabilities);
 
 		switch (runeNum) {
 			case 0:
