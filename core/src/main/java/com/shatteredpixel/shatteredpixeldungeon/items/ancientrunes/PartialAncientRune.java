@@ -24,23 +24,46 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes;
 
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Invisibility;
-import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.shatteredpixeldungeon.items.Item;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfStrength;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.ExoticPotion;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ExoticScroll;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
+import com.watabou.utils.Reflection;
 
-public class PartialAncientRune extends AncientRune {
+public class PartialAncientRune extends AncientRuneInventory {
 	
 	{
 		image = ItemSpriteSheet.ANCIENTRUNE_PARTIAL;
 	}
+
+	protected boolean usableOnItem(Item item) {
+		return item instanceof ExoticPotion || item instanceof ExoticScroll;
+	}
 	
 	@Override
-	protected void onCast(Hero hero) {
+	protected void onItemSelected(Item item) {
+		item.detach(curUser.belongings.backpack);
+		Item result;
 
-		detach( curUser.belongings.backpack );
-		updateQuickslot();
-		Invisibility.dispel();
-		hero.spendAndNext( 1f );
+		if (item instanceof ExoticScroll) {
+			result = Reflection.newInstance(ExoticScroll.exoToReg.get(item.getClass()));
+		} else if (item instanceof ExoticPotion) {
+			result = Reflection.newInstance(ExoticPotion.exoToReg.get(item.getClass()));
+		} else {
+			//refund target
+			item.collect();
+			return;
+		}
+
+		
+		Reflection.newInstance(result.getClass()).collect();
+		Reflection.newInstance(result.getClass()).collect();
+		
+		if (!(result instanceof PotionOfStrength || result instanceof ScrollOfUpgrade)) {
+			Reflection.newInstance(result.getClass()).collect();
+		}
 	}
 	
 	@Override
