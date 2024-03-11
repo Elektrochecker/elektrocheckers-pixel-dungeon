@@ -1,6 +1,12 @@
 /*
+ * Pixel Dungeon
+ * Copyright (C) 2012-2015 Oleg Dolya
+ *
+ * Shattered Pixel Dungeon
+ * Copyright (C) 2014-2024 Evan Debenham
+ * 
  * Elektrocheckers Pixel Dungeon
- * Copyright (C) 2024-2034 Timon Lilje
+ * Copyright (C) 2023-2024 Timon Lilje
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

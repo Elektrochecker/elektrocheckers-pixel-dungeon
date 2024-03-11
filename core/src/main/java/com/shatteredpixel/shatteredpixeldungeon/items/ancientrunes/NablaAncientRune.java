@@ -1,4 +1,10 @@
 /*
+ * Pixel Dungeon
+ * Copyright (C) 2012-2015 Oleg Dolya
+ *
+ * Shattered Pixel Dungeon
+ * Copyright (C) 2014-2024 Evan Debenham
+ * 
  * Elektrocheckers Pixel Dungeon
  * Copyright (C) 2023-2024 Timon Lilje
  *

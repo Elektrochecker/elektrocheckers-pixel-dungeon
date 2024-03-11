@@ -1,6 +1,12 @@
 /*
+ * Pixel Dungeon
+ * Copyright (C) 2012-2015 Oleg Dolya
+ *
+ * Shattered Pixel Dungeon
+ * Copyright (C) 2014-2024 Evan Debenham
+ * 
  * Elektrocheckers Pixel Dungeon
- * Copyright (C) 2024-2034 Timon Lilje
+ * Copyright (C) 2023-2024 Timon Lilje
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +24,6 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes;
 
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Invisibility;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.InvariantAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
@@ -31,7 +36,7 @@ public class CovariantAncientRune extends AncientRuneInventory {
 
 	@Override
 	protected boolean usableOnItem(Item item) {
-		return (item instanceof AncientRune || item instanceof AncientRuneInventory || item instanceof InvariantAncientRune) && !(item == this);
+		return (item instanceof AncientRune || item instanceof InvariantAncientRune) && !(item == this);
 	}
 
 	@Override
