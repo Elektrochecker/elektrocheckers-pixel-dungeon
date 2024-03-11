@@ -18,25 +18,28 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes;
 
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Invisibility;
+import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
+import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 
-public class FieldOperatorAncientRune extends AncientRune {
-	
+public class FieldOperatorAncientRune extends AncientRuneTargeted {
+
 	{
 		image = ItemSpriteSheet.ANCIENTRUNE_FIELD;
 	}
-	
-	@Override
-	protected void onCast(Hero hero) {
 
-		detach( curUser.belongings.backpack );
-		updateQuickslot();
-		Invisibility.dispel();
-		hero.spendAndNext( 1f );
+	@Override
+	protected void affectTarget(Ballistica bolt, Hero hero) {
+		final Char ch = Actor.findChar(bolt.collisionPos);
+
+		if (ch != null && !(ch instanceof Hero)) {
+			ch.damage(1000, this);
+			detach(curUser.belongings.backpack);
+		}
 	}
-	
+
 	@Override
 	public int value() {
 		return 250;
