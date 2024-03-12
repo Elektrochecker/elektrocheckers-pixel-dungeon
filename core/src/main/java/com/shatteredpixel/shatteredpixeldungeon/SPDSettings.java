@@ -314,7 +314,8 @@ public class SPDSettings extends GameSettings {
 	}
 
 	public static boolean news(){
-		return getBoolean(KEY_NEWS, true);
+		// dont check for news
+		return false;
 	}
 
 	public static void updates(boolean value){

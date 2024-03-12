@@ -22,6 +22,7 @@
 package com.shatteredpixel.shatteredpixeldungeon.ui.changelist;
 
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.GreaterTransmutation;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.MagicBridge;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.PrismaticImageSpell;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.Transfiguration;
@@ -42,8 +43,33 @@ public class vModded_Changes {
 	}
 
 	public static void add_modded_updates( ArrayList<ChangeInfo> changeInfos ) {
-		ChangeInfo changes = new ChangeInfo("v.T3 updates", true, "");
-		changes.hardlight(0x4060DD);
+		ChangeInfo changes = new ChangeInfo("v.T4 updates", true, "");
+		changes.hardlight(0x10e3a7);
+		changeInfos.add(changes);
+
+		changes = new ChangeInfo("v2.1.4T4.0", false, null);
+		changes.hardlight(Window.TITLE_COLOR);
+		changeInfos.add(changes);
+
+		changes.addButton(new ChangeButton(Icons.get(Icons.PREFS), Messages.get(ChangesScene.class, "misc"),
+				"_-_Updated game to include SHPD changes up to version 2.3.2.\n\n" +
+				"_-_The Connectivity tab has been removed from the settings. Only game updates are being checked, and only when not using a metered connection.\n\n" +
+				"_-_Improved Scroll of Damnation read fx"
+		));
+
+		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.ANCIENTRUNE_NABLA), "Ancient Runes",
+				"Ancient runes are consumables with unusually powerful effects. They can be stored in the scroll/spell holder.\n\n" +
+				"Two ancient runes can be acquired per run: one being awarded each after defeating Goo or Yog-Dzewa."
+		));
+
+		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.GREATER_TRANSMUTATION), "Greater Transmutation",
+		"A more powerful transmutation spell that is capable of transforming even ancient runes."
+		));
+
+
+		
+		changes = new ChangeInfo("v.T3 updates", true, "");
+		changes.hardlight(0x10e3a7);
 		changeInfos.add(changes);
 
 		changes = new ChangeInfo("v2.1.4T3.3", false, null);
@@ -160,8 +186,8 @@ public class vModded_Changes {
 
 	public static void add_Modded_Content( ArrayList<ChangeInfo> changeInfos ) {
 
-		ChangeInfo changes = new ChangeInfo("Elektrocheckers new Content", true, "");
-		changes.hardlight(0x0020DD);
+		ChangeInfo changes = new ChangeInfo("v.T2", true, "");
+		changes.hardlight(0x10e3a7);
 		changeInfos.add(changes);
  
 		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.WAND_COSMOS), "Wand of cosmic travel",

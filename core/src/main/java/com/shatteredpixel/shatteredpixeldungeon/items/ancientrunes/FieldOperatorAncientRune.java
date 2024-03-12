@@ -25,6 +25,7 @@
 package com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes;
 
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Hunger;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Invisibility;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.FloatingText;
@@ -50,6 +51,12 @@ public class FieldOperatorAncientRune extends AncientRune {
 		hero.sprite.showStatusWithIcon(CharSprite.POSITIVE, Integer.toString(hero.HT), FloatingText.HEALING);
 		
 		CellEmitter.get( hero.pos ).start( ShaftParticle.FACTORY, 0.2f, 3 );
+
+		detach(curUser.belongings.backpack);
+		curUser.spend(1f);
+		curUser.busy();
+		(curUser.sprite).operate(curUser.pos);
+		Invisibility.dispel();
 	}
 
 

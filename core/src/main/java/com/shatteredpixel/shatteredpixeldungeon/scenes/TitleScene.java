@@ -262,7 +262,7 @@ public class TitleScene extends PixelScene {
 		@Override
 		protected void onClick() {
 			super.onClick();
-			String link = "https://github.com/Elektrochecker/shattered-pixel-dungeon/releases";
+			String link = "https://github.com/Elektrochecker/elektrocheckers-pixel-dungeon";
 			ShatteredPixelDungeon.platform.openURI(link);
 		}
 	}

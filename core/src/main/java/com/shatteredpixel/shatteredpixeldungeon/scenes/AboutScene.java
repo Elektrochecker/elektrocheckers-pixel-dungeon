@@ -23,6 +23,8 @@ package com.shatteredpixel.shatteredpixeldungeon.scenes;
 
 import com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Flare;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.shatteredpixeldungeon.ui.Archs;
 import com.shatteredpixel.shatteredpixeldungeon.ui.ExitButton;
 import com.shatteredpixel.shatteredpixeldungeon.ui.Icons;
@@ -62,6 +64,23 @@ public class AboutScene extends PixelScene {
 		Component content = list.content();
 		content.clear();
 
+		// SHPD Toolkit & seedfinder credits
+
+		String toolkitLink = "https://github.com/Elektrochecker/elektrocheckers-pixel-dungeon";
+
+		CreditsBlock mod = new CreditsBlock(true, 0x10e3a7,
+				"Elektrocheckers Pixel Dungeon",
+				new ItemSprite(ItemSpriteSheet.ANCIENTRUNE_FIELD),
+				"Developed by: _Timon Lilje_ aka. _Elektrochecker_",
+				"github.com",
+				toolkitLink);
+		if (landscape()) {
+			mod.setRect((Camera.main.width - colWidth)/2f, 10, 120, 0);
+		} else {
+			mod.setRect((w - fullWidth) / 2f, 6, 120, 0);
+		}
+		content.add(mod);
+
 		//*** Shattered Pixel Dungeon Credits ***
 
 		String shpxLink = "https://ShatteredPixel.com";
@@ -73,13 +92,13 @@ public class AboutScene extends PixelScene {
 		CreditsBlock shpx = new CreditsBlock(true, Window.SHPX_COLOR,
 				"Shattered Pixel Dungeon",
 				Icons.SHPX.get(),
-				"Developed by: _Evan Debenham_\nBased on Pixel Dungeon's open source\nmodified by _Timon Lilje_ aka _Elektrochecker_",
+				"Developed by: _Evan Debenham_\nBased on Pixel Dungeon's open source",
 				"ShatteredPixel.com",
 				shpxLink);
 		if (landscape()){
-			shpx.setRect((w - fullWidth)/2f - 6, 10, 120, 0);
+			shpx.setRect((w - fullWidth)/2f - 6, mod.bottom() + 12, 120, 0);
 		} else {
-			shpx.setRect((w - fullWidth)/2f, 6, 120, 0);
+			shpx.setRect((w - fullWidth)/2f, mod.bottom() + 10, 120, 0);
 		}
 		content.add(shpx);
 
