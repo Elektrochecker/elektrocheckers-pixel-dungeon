@@ -33,6 +33,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.AncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.ContravariantAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.CovariantAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.FieldOperatorAncientRune;
+import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.LaplaceAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.NablaAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.PartialAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact;
@@ -213,6 +214,9 @@ public class GreaterTransmutation extends InventorySpell {
 				break;
 			case 4:
 				result = new PartialAncientRune();
+				break;
+			case 5:
+				result = new LaplaceAncientRune();
 				break;
 			default:
 				result = rune;

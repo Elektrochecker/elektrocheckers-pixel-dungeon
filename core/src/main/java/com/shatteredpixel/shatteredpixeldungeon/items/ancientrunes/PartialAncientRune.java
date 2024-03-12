@@ -24,6 +24,7 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes;
 
+import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfStrength;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.ExoticPotion;
@@ -64,6 +65,8 @@ public class PartialAncientRune extends AncientRuneInventory {
 		if (!(result instanceof PotionOfStrength || result instanceof ScrollOfUpgrade)) {
 			Reflection.newInstance(result.getClass()).collect();
 		}
+
+		curUser.sprite.emitter().start(Speck.factory(Speck.CHANGE), 0.2f, 10);
 	}
 	
 	@Override

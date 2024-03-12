@@ -55,10 +55,6 @@ public abstract class AncientRuneInventory extends AncientRune {
 	@Override
 	protected void onCast(Hero hero) {
 		GameScene.selectItem(itemSelector);
-
-		updateQuickslot();
-		Invisibility.dispel();
-		hero.spendAndNext(1f);
 	}
 
 	protected WndBag.ItemSelector itemSelector = new WndBag.ItemSelector() {
@@ -88,7 +84,11 @@ public abstract class AncientRuneInventory extends AncientRune {
 				curItem = detach(curUser.belongings.backpack);
 
 				((AncientRuneInventory) curItem).onItemSelected(item);
+				curUser.spend( 1f );
+				curUser.busy();
+				(curUser.sprite).operate( curUser.pos );
 
+				Invisibility.dispel();
 				Sample.INSTANCE.play(Assets.Sounds.READ);
 
 			}

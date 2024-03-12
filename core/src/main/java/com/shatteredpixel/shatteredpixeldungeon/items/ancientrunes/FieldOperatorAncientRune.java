@@ -24,27 +24,34 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes;
 
-import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
-import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Hunger;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
-import com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica;
+import com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter;
+import com.shatteredpixel.shatteredpixeldungeon.effects.FloatingText;
+import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
+import com.shatteredpixel.shatteredpixeldungeon.effects.particles.ShaftParticle;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 
-public class FieldOperatorAncientRune extends AncientRuneTargeted {
+public class FieldOperatorAncientRune extends AncientRune {
 
 	{
 		image = ItemSpriteSheet.ANCIENTRUNE_FIELD;
 	}
 
 	@Override
-	protected void affectTarget(Ballistica bolt, Hero hero) {
-		final Char ch = Actor.findChar(bolt.collisionPos);
+	protected void onCast(Hero hero ) {
+		PotionOfHealing.cure( hero );
+		hero.buff( Hunger.class ).satisfy( Hunger.STARVING );
 
-		if (ch != null && !(ch instanceof Hero)) {
-			ch.damage(1000, this);
-			detach(curUser.belongings.backpack);
-		}
+		hero.HP = hero.HT;
+		hero.sprite.emitter().start( Speck.factory( Speck.HEALING ), 0.4f, 4 );
+		hero.sprite.showStatusWithIcon(CharSprite.POSITIVE, Integer.toString(hero.HT), FloatingText.HEALING);
+		
+		CellEmitter.get( hero.pos ).start( ShaftParticle.FACTORY, 0.2f, 3 );
 	}
+
 
 	@Override
 	public int value() {

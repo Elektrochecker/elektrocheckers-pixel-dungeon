@@ -778,6 +778,7 @@ public class ItemSpriteSheet {
 	public static final int ANCIENTRUNE_NABLA  			= ANCIENTRUNES+3;
 	public static final int ANCIENTRUNE_FIELD  			= ANCIENTRUNES+4;
 	public static final int ANCIENTRUNE_PARTIAL  		= ANCIENTRUNES+5;
+	public static final int ANCIENTRUNE_LAPLACE  		= ANCIENTRUNES+6;
 	static{
 		assignItemRect(ANCIENTRUNE_CONTRAVARIANT,  16, 16);
 		assignItemRect(ANCIENTRUNE_COVARIANT,   16, 16);

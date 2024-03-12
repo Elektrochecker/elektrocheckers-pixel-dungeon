@@ -37,6 +37,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.AncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.ContravariantAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.CovariantAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.FieldOperatorAncientRune;
+import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.LaplaceAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.NablaAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.PartialAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DriedRose;
@@ -325,6 +326,9 @@ public class Goo extends Mob {
 				break;
 			case 4:
 				Dungeon.level.drop(new PartialAncientRune(), pos);
+				break;
+			case 5:
+				Dungeon.level.drop(new LaplaceAncientRune(), pos);
 				break;
 		}
 		
