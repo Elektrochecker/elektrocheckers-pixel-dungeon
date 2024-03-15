@@ -779,13 +779,24 @@ public class ItemSpriteSheet {
 	public static final int ANCIENTRUNE_FIELD  			= ANCIENTRUNES+4;
 	public static final int ANCIENTRUNE_PARTIAL  		= ANCIENTRUNES+5;
 	public static final int ANCIENTRUNE_LAPLACE  		= ANCIENTRUNES+6;
+	public static final int ANCIENTRUNE_PROPAGATION  	= ANCIENTRUNES+7;
+	public static final int ANCIENTRUNE_COMMUTATOR  	= ANCIENTRUNES+8;
+	public static final int ANCIENTRUNE_EXISTENCE  		= ANCIENTRUNES+9;
+	public static final int ANCIENTRUNE_CONTINUITY  	= ANCIENTRUNES+10;
+	public static final int ANCIENTRUNE_LEVI_CIVITA  	= ANCIENTRUNES+11;
 	static{
 		assignItemRect(ANCIENTRUNE_CONTRAVARIANT,  16, 16);
 		assignItemRect(ANCIENTRUNE_COVARIANT,   16, 16);
 		assignItemRect(ANCIENTRUNE_INVARIANT,  16, 16);
 		assignItemRect(ANCIENTRUNE_NABLA, 16, 16);
 		assignItemRect(ANCIENTRUNE_FIELD,  16, 16);
-		assignItemRect(ANCIENTRUNE_PARTIAL,   16, 16);
+		assignItemRect(ANCIENTRUNE_PARTIAL,   11, 14);
+		assignItemRect(ANCIENTRUNE_LAPLACE,   14, 12);
+		assignItemRect(ANCIENTRUNE_PROPAGATION,   10, 11);
+		assignItemRect(ANCIENTRUNE_COMMUTATOR,   15, 14);
+		assignItemRect(ANCIENTRUNE_EXISTENCE,   10, 15);
+		assignItemRect(ANCIENTRUNE_CONTINUITY,   13, 13);
+		assignItemRect(ANCIENTRUNE_LEVI_CIVITA,   16, 14);
 	}
 
 	//for smaller 8x8 icons that often accompany an item sprite

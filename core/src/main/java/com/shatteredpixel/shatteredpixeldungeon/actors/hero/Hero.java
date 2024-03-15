@@ -80,6 +80,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Dewdrop;
 import com.shatteredpixel.shatteredpixeldungeon.items.EquipableItem;
 import com.shatteredpixel.shatteredpixeldungeon.items.Heap;
 import com.shatteredpixel.shatteredpixeldungeon.items.Heap.Type;
+import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.PropagationAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.KindOfWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
@@ -376,13 +377,24 @@ public class Hero extends Char {
 		}
 	}
 
-	public int bonusTalentPoints(int tier){
-		if (lvl < (Talent.tierLevelThresholds[tier]-1)
+	public int bonusTalentPoints(int tier) {
+		if (lvl < (Talent.tierLevelThresholds[tier] - 1)
 				|| (tier == 3 && subClass == HeroSubClass.NONE)
 				|| (tier == 4 && armorAbility == null)) {
 			return 0;
+		} else if ((buff(PropagationAncientRune.AncientRunePropagationTracker.class) != null
+				&& buff(PropagationAncientRune.AncientRunePropagationTracker.class).isBoosted(tier))) {
+
+			// prevent cheese by allowing T1 to still be affected by divine inspiration
+			if (buff(PotionOfDivineInspiration.DivineInspirationTracker.class) != null
+					&& buff(PotionOfDivineInspiration.DivineInspirationTracker.class).isBoosted(1)) {
+				return 2;
+			}
+
+			//1 point for tier 1, 2 for tier 2 etc
+			return tier;
 		} else if (buff(PotionOfDivineInspiration.DivineInspirationTracker.class) != null
-					&& buff(PotionOfDivineInspiration.DivineInspirationTracker.class).isBoosted(tier)) {
+				&& buff(PotionOfDivineInspiration.DivineInspirationTracker.class).isBoosted(tier)) {
 			return 2;
 		} else {
 			return 0;

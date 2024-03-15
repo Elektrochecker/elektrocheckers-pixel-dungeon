@@ -45,12 +45,16 @@ import com.shatteredpixel.shatteredpixeldungeon.levels.MiningLevel;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
+import com.watabou.utils.Random;
 
 public class NablaAncientRune extends AncientRuneInventory {
 
 	{
 		image = ItemSpriteSheet.ANCIENTRUNE_NABLA;
 	}
+
+	// 20% common, 30% uncommon, 50% rare enchantment or glyph
+	private static float[] enchantmentChances = {20,30,50};
 
 	@Override
 	protected boolean usableOnItem(Item item) {
@@ -129,7 +133,23 @@ public class NablaAncientRune extends AncientRuneInventory {
 		Armor changedArmor = a;
 
 		Class<? extends Armor.Glyph> existing = ((Armor) a).glyph != null ? ((Armor) a).glyph.getClass() : null;
-		Glyph glyph = Armor.Glyph.randomRare(existing);
+
+		Glyph glyph;
+		
+		int enchTier = Random.chances(enchantmentChances);
+		switch (enchTier) {
+			default:
+			case 0:
+				glyph = Armor.Glyph.randomCommon(existing);
+				break;
+			case 1:
+				glyph = Armor.Glyph.randomUncommon(existing);
+				break;
+			case 2:
+				glyph = Armor.Glyph.randomRare(existing);
+				break;
+		}
+		
 
 		changedArmor.glyph = glyph;
 		changedArmor.glyphHardened = true;
@@ -141,7 +161,7 @@ public class NablaAncientRune extends AncientRuneInventory {
 		Weapon changedWeapon;
 		Generator.Category newTier;
 
-		int tier = ((MeleeWeapon) w).tier - 1;
+		int tier = ((MeleeWeapon) w).tier - 0;
 
 		if (tier < 1) {
 			tier = 1;
@@ -165,10 +185,24 @@ public class NablaAncientRune extends AncientRuneInventory {
 		Class<? extends Weapon.Enchantment> existing = ((Weapon) w).enchantment != null
 				? ((Weapon) w).enchantment.getClass()
 				: null;
-		Enchantment ench = Weapon.Enchantment.randomRare(existing);
+
+		Enchantment ench;
+
+		int enchTier = Random.chances(enchantmentChances);
+		switch (enchTier) {
+			default:
+			case 0:
+				ench = Weapon.Enchantment.randomCommon(existing);
+				break;
+			case 1:
+				ench = Weapon.Enchantment.randomUncommon(existing);
+				break;
+			case 2:
+				ench = Weapon.Enchantment.randomRare(existing);
+				break;
+		}
 
 		changedWeapon.enchantment = ench;
-		changedWeapon.curseInfusionBonus = w.curseInfusionBonus;
 		changedWeapon.masteryPotionBonus = w.masteryPotionBonus;
 		changedWeapon.levelKnown = w.levelKnown;
 		changedWeapon.cursedKnown = w.cursedKnown;

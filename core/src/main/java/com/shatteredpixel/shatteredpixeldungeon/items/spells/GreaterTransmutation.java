@@ -32,10 +32,12 @@ import com.shatteredpixel.shatteredpixeldungeon.items.KindOfWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.AncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.ContravariantAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.CovariantAncientRune;
+import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.ExistenceAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.FieldOperatorAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.LaplaceAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.NablaAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.PartialAncientRune;
+import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.PropagationAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DriedRose;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.AlchemicalCatalyst;
@@ -217,6 +219,12 @@ public class GreaterTransmutation extends InventorySpell {
 				break;
 			case 5:
 				result = new LaplaceAncientRune();
+				break;
+			case 6:
+				result = new PropagationAncientRune();
+				break;
+			case 7:
+				result = new ExistenceAncientRune();
 				break;
 			default:
 				result = rune;

@@ -36,10 +36,12 @@ import com.shatteredpixel.shatteredpixeldungeon.effects.FloatingText;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.AncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.ContravariantAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.CovariantAncientRune;
+import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.ExistenceAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.FieldOperatorAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.LaplaceAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.NablaAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.PartialAncientRune;
+import com.shatteredpixel.shatteredpixeldungeon.items.ancientrunes.PropagationAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DriedRose;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.SkeletonKey;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.GooBlob;
@@ -329,6 +331,12 @@ public class Goo extends Mob {
 				break;
 			case 5:
 				Dungeon.level.drop(new LaplaceAncientRune(), pos);
+				break;
+			case 6:
+				Dungeon.level.drop(new PropagationAncientRune(), pos);
+				break;
+			case 7:
+				Dungeon.level.drop(new ExistenceAncientRune(), pos);
 				break;
 		}
 		
