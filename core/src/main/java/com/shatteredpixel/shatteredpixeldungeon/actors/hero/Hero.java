@@ -387,7 +387,8 @@ public class Hero extends Char {
 
 			// prevent cheese by allowing T1 to still be affected by divine inspiration
 			if (buff(PotionOfDivineInspiration.DivineInspirationTracker.class) != null
-					&& buff(PotionOfDivineInspiration.DivineInspirationTracker.class).isBoosted(1)) {
+					&& buff(PotionOfDivineInspiration.DivineInspirationTracker.class).isBoosted(1)
+					&& tier == 1) {
 				return 2;
 			}
 

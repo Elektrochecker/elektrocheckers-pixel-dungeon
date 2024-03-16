@@ -70,7 +70,7 @@ public class Ghostbulb extends Plant {
 	}
 
 	public static void spawnGhosts(Char ch) {
-		
+		if (ch == null) return;
 		if (ch instanceof Hero) {
 
 			((Hero) ch).curAction = null;
