@@ -4,6 +4,9 @@
  *
  * Shattered Pixel Dungeon
  * Copyright (C) 2014-2024 Evan Debenham
+ * 
+ * Elektrocheckers Pixel Dungeon
+ * Copyright (C) 2023-2024 Timon Lilje
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,10 +25,11 @@
 package com.shatteredpixel.shatteredpixeldungeon.ui.changelist;
 
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
-import com.shatteredpixel.shatteredpixeldungeon.items.spells.GreaterTransmutation;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.MagicBridge;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.PrismaticImageSpell;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.Transfiguration;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Corroding;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dirk;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.ChangesScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
@@ -47,7 +51,35 @@ public class vModded_Changes {
 		changes.hardlight(0x10e3a7);
 		changeInfos.add(changes);
 
-		changes = new ChangeInfo("v2.1.4T4.0", false, null);
+		changes = new ChangeInfo("v2.3.2T4.1", false, null);
+		changes.hardlight(Window.TITLE_COLOR);
+		changeInfos.add(changes);
+
+		changes.addButton(new ChangeButton(new Image(Assets.Sprites.SPINNER, 144, 0, 16, 16), Messages.get(ChangesScene.class, "bugfixes"),
+			"_-_fixed a bug where the game would crash if the boots of nature activated a ghostbulb without a target."
+		));
+
+		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.ANCIENTRUNE_NABLA), "Ancient Rune of Nabla",
+				"The ancient rune of Nabla can now also produce common and uncommon enchantments.\n" +
+				"The probabilities are: 20% common, 30% uncommon and 50% rare.\n\n" +
+				"In addition, melee weapons are now longer downgraded a tier.\n\n" +
+				"The Ancient rune of Nabla can now also enchant the huntress' spirit bow."
+		));
+		
+		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.ANCIENTRUNE_EXISTENCE), "Ancient Runes",
+		"The following ancient runes were added in this patch:\n\n" +
+		"_-_Ancient Rune of Existence\n" +
+		"_-_Ancient Rune of Propagation\n"
+		));
+		
+		changes.addButton( new ChangeButton(new ItemSprite(new Dirk().enchant(new Corroding())), "Corroding Enchantment",
+				"This powerful enchantment injects corrosive chemicals into the enemy, inflicting corrosion..\n\n" +
+				"An elemental strike with a corroding enchantment spreads corrosive gas to the affected area."
+		));
+
+		//new spell
+
+		changes = new ChangeInfo("v2.3.2T4.0", false, null);
 		changes.hardlight(Window.TITLE_COLOR);
 		changeInfos.add(changes);
 
@@ -57,9 +89,17 @@ public class vModded_Changes {
 				"_-_Improved Scroll of Damnation read fx"
 		));
 
-		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.ANCIENTRUNE_NABLA), "Ancient Runes",
+		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.ANCIENTRUNE_PARTIAL), "Ancient Runes",
 				"Ancient runes are consumables with unusually powerful effects. They can be stored in the scroll/spell holder.\n\n" +
-				"Two ancient runes can be acquired per run: one being awarded each after defeating Goo or Yog-Dzewa."
+				"Two ancient runes can be acquired per run: one being awarded each after defeating Goo or Yog-Dzewa.\n\n" +
+				"The following ancient runes were added in this patch:\n\n" +
+				"_-_Covariant Ancient Rune\n" +
+				"_-_Contravariant Ancient Rune\n" +
+				"_-_Invariant Ancient Rune (technically a spell)\n" +
+				"_-_Ancient Rune of Nabla\n" +
+				"_-_Ancient Rune of Laplace\n" +
+				"_-_Partial Ancient Rune\n" +
+				"_-_Ancient Rune of the Field\n"
 		));
 
 		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.GREATER_TRANSMUTATION), "Greater Transmutation",

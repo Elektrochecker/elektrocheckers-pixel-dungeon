@@ -36,6 +36,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor.Glyph;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.Pickaxe;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon.Enchantment;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MagesStaff;
@@ -62,6 +63,8 @@ public class NablaAncientRune extends AncientRuneInventory {
 		if (item instanceof MeleeWeapon) {
 			return !(item instanceof Pickaxe && Dungeon.level instanceof MiningLevel);
 		} else if (item instanceof Armor) {
+			return true;
+		} else if (item instanceof SpiritBow) {
 			return true;
 		} else {
 			return false;
@@ -118,6 +121,8 @@ public class NablaAncientRune extends AncientRuneInventory {
 		if (item instanceof MagesStaff) {
 			return changeStaff((MagesStaff) item);
 
+		} else if (item instanceof SpiritBow) {
+			return changeSpiritBow((SpiritBow) item);
 		} else if (item instanceof Armor) {
 			return changeArmor((Armor) item);
 
@@ -129,6 +134,39 @@ public class NablaAncientRune extends AncientRuneInventory {
 		}
 	}
 
+	private static SpiritBow changeSpiritBow(SpiritBow s) {
+		SpiritBow changedBow = s;
+
+		Class<? extends Weapon.Enchantment> existing = ((SpiritBow) s).enchantment != null
+		? ((SpiritBow) s).enchantment.getClass()
+		: null;
+
+		Enchantment ench;
+
+		int enchTier = Random.chances(enchantmentChances);
+		switch (enchTier) {
+			default:
+			case 0:
+				ench = Weapon.Enchantment.randomCommon(existing);
+				break;
+			case 1:
+				ench = Weapon.Enchantment.randomUncommon(existing);
+				break;
+			case 2:
+				ench = Weapon.Enchantment.randomRare(existing);
+				break;
+		}
+
+		changedBow.enchantment = ench;
+		changedBow.masteryPotionBonus = s.masteryPotionBonus;
+		changedBow.levelKnown = s.levelKnown;
+		changedBow.cursedKnown = true;
+		changedBow.cursed = false;
+		changedBow.augment = s.augment;
+		changedBow.enchantHardened = true;
+
+		return s;
+	}
 	private static Armor changeArmor(Armor a) {
 		Armor changedArmor = a;
 
@@ -205,8 +243,8 @@ public class NablaAncientRune extends AncientRuneInventory {
 		changedWeapon.enchantment = ench;
 		changedWeapon.masteryPotionBonus = w.masteryPotionBonus;
 		changedWeapon.levelKnown = w.levelKnown;
-		changedWeapon.cursedKnown = w.cursedKnown;
-		changedWeapon.cursed = w.cursed;
+		changedWeapon.cursedKnown = true;
+		changedWeapon.cursed = false;
 		changedWeapon.augment = w.augment;
 		changedWeapon.enchantHardened = true;
 

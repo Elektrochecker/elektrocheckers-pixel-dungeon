@@ -71,7 +71,9 @@ public class ExistenceAncientRune extends AncientRune {
 	private static Item genEquipmentDrop() {
 		Item result;
 		
-		int floorset = (Dungeon.depth - 1) / 5;
+		int floorset = (Dungeon.depth) / 5;
+		int floorset_afterbosses = (Dungeon.depth - 1) / 5;
+		
 		switch (Random.Int(5)) {
 			default:
 			case 0:
@@ -101,7 +103,7 @@ public class ExistenceAncientRune extends AncientRune {
 
 		if (result.isUpgradable()) {
 			//+2 chances: 0% sewers, 20% prison, 40% caves, 60% metro, 80% halls
-			if(Random.Int(5) < floorset + 1) {
+			if(Random.Int(5) < floorset_afterbosses + 1) {
 				result.level(2);
 			} else {
 				result.level(1);
