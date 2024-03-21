@@ -26,17 +26,22 @@ package com.shatteredpixel.shatteredpixeldungeon.items.artifacts;
 
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Invisibility;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.MagicImmune;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Regeneration;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent;
 import com.shatteredpixel.shatteredpixeldungeon.effects.particles.ElmoParticle;
+import com.shatteredpixel.shatteredpixeldungeon.items.EnergyCrystal;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.Bag;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.ScrollHolder;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfEnergy;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfRecharging;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.Alchemize;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.AquaBlast;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.FeatherFall;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.InventorySpell;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.MagicBridge;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.PhaseShift;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.PrismaticImageSpell;
@@ -48,6 +53,8 @@ import com.shatteredpixel.shatteredpixeldungeon.items.spells.TargetedSpell;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.TelekineticGrab;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.Transfiguration;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.WildEnergy;
+import com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap;
+import com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
@@ -79,8 +86,11 @@ public class CrackedGeode extends Artifact {
 
 	public static final String AC_CAST = "CAST";
 	public static final String AC_ADD = "ADD";
+	public static final String AC_DESTROY = "DESTROY";
 
 	public static final int[] chargesAtLevel = { 1, 2, 3, 4 };
+
+	private Class<?extends Trap> storedTrap = null;
 
 	public static final Class<?>[] spellClasses = new Class<?>[] {
 			Alchemize.class,
@@ -173,15 +183,106 @@ public class CrackedGeode extends Artifact {
 		}
 
 		if (action.equals(AC_CAST)) {
-			Spell s = (Spell) Reflection.newInstance(loadedSpellClass);
-			GLog.i(s.toString());
-			
-			s.execute(hero, action);
-			
-			loadedSpellClass = loadNextSpell();
-			
+
+			if (!isEquipped(hero)) {
+				GLog.i(Messages.get(Artifact.class, "need_to_equip"));
+			} else if (charge <= 0) {
+				GLog.i(Messages.get(this, "no_charge"));
+			} else if (cursed) {
+				GLog.i(Messages.get(this, "cursed"));
+			} else {
+				
+				Spell s = (Spell) Reflection.newInstance(loadedSpellClass);
+
+				if (s instanceof ReclaimTrap) {
+					s = new ReclaimTrap() {
+						@Override
+						protected void affectTarget(Ballistica bolt, Hero hero) {
+							if (storedTrap == null) {
+								// storing a trap doesn't consume a charge
+								Trap t = Dungeon.level.traps.get(bolt.collisionPos);
+								if (t != null && t.active && t.visible) {
+									t.disarm(); // even disarms traps that normally wouldn't be
+
+									Sample.INSTANCE.play(Assets.Sounds.LIGHTNING);
+									ScrollOfRecharging.charge(hero);
+									storedTrap = t.getClass();
+
+								} else {
+									GLog.w(Messages.get(ReclaimTrap.class, "no_trap"));
+								}
+							} else {
+								charge--;
+
+								Trap t = Reflection.newInstance(storedTrap);
+								storedTrap = null;
+
+								t.pos = bolt.collisionPos;
+								t.activate();
+
+								loadedSpellClass = loadNextSpell();
+
+								updateQuickslot();
+								Talent.onArtifactUsed(Dungeon.hero);
+							}
+						}
+					};
+
+					s.execute(hero);
+					GLog.i(Messages.get(this, "used_spell", Messages.get(loadedSpellClass, "name")));
+				} else if (s instanceof TargetedSpell) {
+					charge--;
+
+					s.execute(hero, action);
+					GLog.i(Messages.get(this, "used_spell", Messages.get(loadedSpellClass, "name")));
+
+					loadedSpellClass = loadNextSpell();
+
+					updateQuickslot();
+					Talent.onArtifactUsed(Dungeon.hero);
+				}
+
+				else if (s instanceof InventorySpell) {
+					charge--;
+
+					s.execute(hero, action);
+					GLog.i(Messages.get(this, "used_spell", Messages.get(loadedSpellClass, "name")));
+
+					loadedSpellClass = loadNextSpell();
+
+					updateQuickslot();
+					Talent.onArtifactUsed(Dungeon.hero);
+				} else {
+					charge--;
+
+					s.execute(hero, action);
+					GLog.i(Messages.get(this, "used_spell", Messages.get(loadedSpellClass, "name")));
+
+					loadedSpellClass = loadNextSpell();
+
+					updateQuickslot();
+					Talent.onArtifactUsed(Dungeon.hero);
+				}
+
+			}
+
 		} else if (action.equals(AC_ADD)) {
-			GameScene.selectItem(itemSelector);
+			GameScene.selectItem(addItemSelector);
+		} else if (action.equals(AC_DESTROY)) {
+			charge--;
+			GLog.i(Messages.get(this, "destr_spell", Messages.get(loadedSpellClass, "name")));
+			loadedSpellClass = loadNextSpell();
+
+			new EnergyCrystal().doPickUp(hero);
+
+			hero.sprite.operate(hero.pos);
+			hero.busy();
+			hero.spend(1f);
+			Sample.INSTANCE.play(Assets.Sounds.CHAINS);
+			hero.sprite.emitter().burst(ElmoParticle.FACTORY, 12);
+
+			updateQuickslot();
+			Talent.onArtifactUsed(Dungeon.hero);
 		}
 	}
 
@@ -196,15 +297,21 @@ public class CrackedGeode extends Artifact {
 		if (isEquipped(hero) && charge > 0 && !cursed && hero.buff(MagicImmune.class) == null) {
 			actions.add(AC_CAST);
 		}
+
 		if (isEquipped(hero) && level() < levelCap && !cursed && hero.buff(MagicImmune.class) == null) {
 			actions.add(AC_ADD);
 		}
+
+		if (isEquipped(hero) && charge > 0 && !cursed && hero.buff(MagicImmune.class) == null) {
+			actions.add(AC_DESTROY);
+		}
+
 		return actions;
 	}
 
 	@Override
 	public ItemSprite.Glowing glowing() {
-		if (loadedSpellClass != null && isEquipped(Dungeon.hero)){
+		if (loadedSpellClass != null && isEquipped(Dungeon.hero) && charge > 0 && !cursed){
 			return new ItemSprite.Glowing(spellColors.get(loadedSpellClass));
 		}
 		return null;
@@ -245,16 +352,21 @@ public class CrackedGeode extends Artifact {
 		if (isEquipped(Dungeon.hero)) {
 			if (cursed) {
 				desc += "\n\n" + Messages.get(this, "desc_cursed");
-			}
 
-			if (loadedSpellClass != null) {
-				desc += "\n\n" +  Messages.get(this, "curr_spell", Messages.get(loadedSpellClass, "name"));
-			}
+			} else {
+				if (loadedSpellClass != null) {
+					desc += "\n\n" + Messages.get(this, "curr_spell", Messages.get(loadedSpellClass, "name"));
+				}
 
-			if (level() < levelCap && spellsToAdd.size() > 0) {
-				desc += "\n\n" + Messages.get(this, "desc_index");
-				for (int i = 0; i < spellsToAdd.size(); i++) {
-					desc += "\n" + "- _" + Messages.get(spellsToAdd.get(i), "name") + "_";
+				if (storedTrap != null && loadedSpellClass == ReclaimTrap.class ){
+					desc += "\n\n" + Messages.get(ReclaimTrap.class, "desc_trap", Messages.get(storedTrap, "name"));
+				}
+
+				if (level() < levelCap && spellsToAdd.size() > 0) {
+					desc += "\n\n" + Messages.get(this, "desc_index") + "\n";
+					for (int i = 0; i < spellsToAdd.size(); i++) {
+						desc += "\n" + "- _" + Messages.get(spellsToAdd.get(i), "name") + "_";
+					}
 				}
 			}
 		}
@@ -288,11 +400,9 @@ public class CrackedGeode extends Artifact {
 	public class geodeRecharge extends ArtifactBuff {
 		@Override
 		public boolean act() {
-			if (charge < chargeCap
-					&& !cursed
-					&& target.buff(MagicImmune.class) == null
-					&& Regeneration.regenOn()) {
-				float chargeGain = 1 / (120f - (chargeCap - charge) * 10f);
+			if (charge < chargeCap && !cursed && target.buff(MagicImmune.class) == null && Regeneration.regenOn()) {
+
+				float chargeGain = 1 / (120f - level() * 12f);
 				chargeGain *= RingOfEnergy.artifactChargeMultiplier(target);
 				partialCharge += chargeGain;
 
@@ -314,7 +424,7 @@ public class CrackedGeode extends Artifact {
 		}
 	}
 
-	protected WndBag.ItemSelector itemSelector = new WndBag.ItemSelector() {
+	protected WndBag.ItemSelector addItemSelector = new WndBag.ItemSelector() {
 
 		@Override
 		public String textPrompt() {

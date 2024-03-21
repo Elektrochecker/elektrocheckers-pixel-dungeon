@@ -25,6 +25,7 @@ package com.shatteredpixel.shatteredpixeldungeon.items.spells;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.MagicImmune;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CrackedGeode;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 
@@ -51,15 +52,19 @@ public abstract class Spell extends Item {
 		
 		super.execute( hero, action );
 		
-		if (action.equals( AC_CAST )) {
-			
-			if (curUser.buff(MagicImmune.class) != null){
-				GLog.w( Messages.get(this, "no_magic") );
+		if (action.equals(AC_CAST)) {
+
+			if (curUser.buff(MagicImmune.class) != null) {
+				GLog.w(Messages.get(this, "no_magic"));
+				return;
+			} else if (hero.buff(CrackedGeode.geodeRecharge.class) != null
+					&& hero.buff(CrackedGeode.geodeRecharge.class).isCursed()) {
+				GLog.n(Messages.get(CrackedGeode.class, "cursed_spells"));
 				return;
 			}
-			
-			onCast( hero );
-			
+
+			onCast(hero);
+
 		}
 	}
 	
