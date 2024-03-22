@@ -196,10 +196,10 @@ public class WelcomeScene extends PixelScene {
 				//TODO: change the messages here in accordance with the type of patch.
 				message = Messages.get(this, "patch_intro");
 				message += "\n";
-				//message += "\n" + Messages.get(this, "patch_balance");
+				message += "\n" + "This mod adds additional content to shattered pixel dungeon";
+				message += "\n" + Messages.get(this, "patch_balance");
 				// message += "\n" + Messages.get(this, "patch_bugfixes");
 				// message += "\n" + Messages.get(this, "patch_translations");
-				message += "\n" + "This mod adds additional content to shattered pixel dungeon v2.0.0";
 
 			}
 

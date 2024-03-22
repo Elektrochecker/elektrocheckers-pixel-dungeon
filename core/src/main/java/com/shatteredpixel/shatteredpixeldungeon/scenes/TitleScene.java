@@ -28,7 +28,6 @@ import com.shatteredpixel.shatteredpixeldungeon.GamesInProgress;
 import com.shatteredpixel.shatteredpixeldungeon.SPDSettings;
 import com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.shatteredpixeldungeon.effects.BannerSprites;
-import com.shatteredpixel.shatteredpixeldungeon.effects.Fireball;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Languages;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.services.news.News;
@@ -83,9 +82,6 @@ public class TitleScene extends PixelScene {
 		title.y = 2 + (topRegion - title.height()) / 2f;
 
 		align(title);
-
-		placeTorch(title.x + 22, title.y + 46);
-		placeTorch(title.x + title.width - 22, title.y + 46);
 
 		Image signs = new Image( BannerSprites.get( BannerSprites.Type.PIXEL_DUNGEON_SIGNS ) ) {
 			private float time = 0;
@@ -157,7 +153,7 @@ public class TitleScene extends PixelScene {
 		btnBadges.icon(Icons.get(Icons.BADGES));
 		add(btnBadges);
 
-		StyledButton btnNews = new NewsButton(GREY_TR, "Source");
+		StyledButton btnNews = new SourceButton(GREY_TR, "Source");
 		btnNews.icon(Icons.get(Icons.NEWS));
 		add(btnNews);
 
@@ -174,7 +170,7 @@ public class TitleScene extends PixelScene {
 				ShatteredPixelDungeon.switchScene( AboutScene.class );
 			}
 		};
-		btnAbout.icon(Icons.get(Icons.SHPX));
+		btnAbout.icon(Icons.get(Icons.NEWS));
 		add(btnAbout);
 		
 		final int BTN_HEIGHT = 20;
@@ -219,16 +215,10 @@ public class TitleScene extends PixelScene {
 
 		fadeIn();
 	}
-	
-	private void placeTorch( float x, float y ) {
-		Fireball fb = new Fireball();
-		fb.setPos( x, y );
-		add( fb );
-	}
 
-	private static class NewsButton extends StyledButton {
+	private static class SourceButton extends StyledButton {
 
-		public NewsButton(Chrome.Type type, String label ){
+		public SourceButton(Chrome.Type type, String label ){
 			super(type, label);
 			if (SPDSettings.news()) News.checkForNews();
 		}
@@ -355,8 +345,7 @@ public class TitleScene extends PixelScene {
 
 		public SupportButton( Chrome.Type type, String label ){
 			super(type, label);
-			icon(Icons.get(Icons.GOLD));
-			textColor(Window.TITLE_COLOR);
+			icon(Icons.get(Icons.COPY));
 		}
 
 		@Override
