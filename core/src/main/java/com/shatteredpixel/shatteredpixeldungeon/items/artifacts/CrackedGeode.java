@@ -26,7 +26,6 @@ package com.shatteredpixel.shatteredpixeldungeon.items.artifacts;
 
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Invisibility;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.MagicImmune;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Regeneration;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
@@ -41,6 +40,8 @@ import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfRecharging
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.Alchemize;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.AquaBlast;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.FeatherFall;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.FlameShot;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.IceShot;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.InventorySpell;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.MagicBridge;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.PhaseShift;
@@ -52,6 +53,8 @@ import com.shatteredpixel.shatteredpixeldungeon.items.spells.SummonElemental;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.TargetedSpell;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.TelekineticGrab;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.Transfiguration;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.VampiricShot;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.VenomShot;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.WildEnergy;
 import com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap;
 import com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica;
@@ -104,22 +107,30 @@ public class CrackedGeode extends Artifact {
 			SummonElemental.class,
 			TelekineticGrab.class,
 			Transfiguration.class,
-			WildEnergy.class
+			WildEnergy.class,
+			FlameShot.class,
+			IceShot.class,
+			VenomShot.class,
+			VampiricShot.class
 	};
 
 	private static final float[] castingProbs = new float[] {
-			2, // Alchemize
-			2, // AquaBlast
+			1, // Alchemize
+			3, // AquaBlast
 			1, // FeatherFall
 			2, // MagicBridge
-			2, // PhaseShift
+			3, // PhaseShift
 			1, // PrismaticImageSpell
-			2, // ReclaimTrap
+			3, // ReclaimTrap
 			2, // Recycle
 			1, // SummonElemental
-			2, // TelekineticGrab
+			1, // TelekineticGrab
 			2, // Transfiguration
-			2 // WildEnergy
+			2, // WildEnergy
+			2, // FlameShot
+			2, // IceShot
+			2, // VenomShot
+			2 // VampiricShot
 	};
 
 	private static final HashMap<Class<? extends Spell>, Integer> spellColors = new HashMap<>();
@@ -136,6 +147,10 @@ public class CrackedGeode extends Artifact {
 		spellColors.put(TelekineticGrab.class, 		0xffffff);
 		spellColors.put(Transfiguration.class, 		0xaf0061);
 		spellColors.put(WildEnergy.class, 			0x404040);
+		spellColors.put(FlameShot.class, 			0xfb7200);
+		spellColors.put(IceShot.class, 				0xccb0ff);
+		spellColors.put(VenomShot.class, 			0xc00eff);
+		spellColors.put(VampiricShot.class, 		0x782c2b);
 	}
 
 	private final ArrayList<Class> spellsToAdd = new ArrayList<>();
@@ -147,17 +162,21 @@ public class CrackedGeode extends Artifact {
 
 		float[] upgrProbs = new float[] {
 				2, // Alchemize
-				2, // AquaBlast
+				3, // AquaBlast
 				2, // FeatherFall
-				2, // MagicBridge
-				2, // PhaseShift
+				3, // MagicBridge
+				3, // PhaseShift
 				2, // PrismaticImageSpell
 				1, // ReclaimTrap
 				0, // Recycle
 				0, // SummonElemental
-				2, // TelekineticGrab
+				3, // TelekineticGrab
 				2, // Transfiguration
-				2 // WildEnergy
+				1, // WildEnergy
+				2, // FlameShot
+				2, // IceShot
+				2, // VenomShot
+				2 // VampiricShot
 		};
 
 		int i = Random.chances(upgrProbs);

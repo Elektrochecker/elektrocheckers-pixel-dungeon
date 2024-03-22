@@ -48,7 +48,9 @@ import com.shatteredpixel.shatteredpixeldungeon.items.spells.ArcaneCatalyst;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.BeaconOfReturning;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.CurseInfusion;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.FeatherFall;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.FlameShot;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.GreaterTransmutation;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.IceShot;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.InvariantAncientRune;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.MagicBridge;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.MagicalInfusion;
@@ -59,6 +61,8 @@ import com.shatteredpixel.shatteredpixeldungeon.items.spells.Recycle;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.SummonElemental;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.TelekineticGrab;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.Transfiguration;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.VampiricShot;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.VenomShot;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.WildEnergy;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon;
@@ -214,7 +218,11 @@ public abstract class Recipe {
 		new PrismaticImageSpell.Recipe(),
 		new Transfiguration.Recipe(),
 		new MagicBridge.Recipe(),
-		new InvariantAncientRune.Recipe()
+		new InvariantAncientRune.Recipe(),
+		new FlameShot.Recipe(),
+		new IceShot.Recipe(),
+		new VenomShot.Recipe(),
+		new VampiricShot.Recipe(),
 	};
 	
 	private static Recipe[] threeIngredientRecipes = new Recipe[]{

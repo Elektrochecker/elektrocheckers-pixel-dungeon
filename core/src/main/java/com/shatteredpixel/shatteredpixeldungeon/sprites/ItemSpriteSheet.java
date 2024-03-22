@@ -643,7 +643,12 @@ public class ItemSpriteSheet {
 	public static final int RECYCLE         = SPELLS+14;
 	public static final int PRISMATIC_IMAGE = SPELLS+15;
 
-	public static final int GREATER_TRANSMUTATION = MORE_SPELLS+0;
+	public static final int GREATER_TRANSMUTATION 	= MORE_SPELLS+0;
+	public static final int FLAME_SHOT 				= MORE_SPELLS+6;
+	public static final int ICE_SHOT 				= MORE_SPELLS+7;
+	public static final int VENOM_SHOT 				= MORE_SPELLS+8;
+	public static final int VAMP_SHOT 				= MORE_SPELLS+9;
+
 	static{
 		assignItemRect(MAGIC_PORTER,    12, 11);
 		assignItemRect(PHASE_SHIFT,     12, 11);
