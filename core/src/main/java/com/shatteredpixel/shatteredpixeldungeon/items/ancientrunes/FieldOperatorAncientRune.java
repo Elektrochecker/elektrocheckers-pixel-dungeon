@@ -32,8 +32,11 @@ import com.shatteredpixel.shatteredpixeldungeon.effects.FloatingText;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.effects.particles.ShaftParticle;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfStrength;
+import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
+import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 
 public class FieldOperatorAncientRune extends AncientRune {
 
@@ -42,15 +45,18 @@ public class FieldOperatorAncientRune extends AncientRune {
 	}
 
 	@Override
-	protected void onCast(Hero hero ) {
-		PotionOfHealing.cure( hero );
-		hero.buff( Hunger.class ).satisfy( Hunger.STARVING );
+	protected void onCast(Hero hero) {
+		PotionOfHealing.cure(hero);
+		hero.buff(Hunger.class).satisfy(Hunger.STARVING);
+
+		hero.STR++;
+		GLog.p(Messages.get(PotionOfStrength.class, "msg", hero.STR()));
 
 		hero.HP = hero.HT;
-		hero.sprite.emitter().start( Speck.factory( Speck.HEALING ), 0.4f, 4 );
-		hero.sprite.showStatusWithIcon(CharSprite.POSITIVE, Integer.toString(hero.HT), FloatingText.HEALING);
-		
-		CellEmitter.get( hero.pos ).start( ShaftParticle.FACTORY, 0.2f, 3 );
+		hero.sprite.emitter().start(Speck.factory(Speck.HEALING), 0.4f, 4);
+		hero.sprite.showStatusWithIcon(CharSprite.POSITIVE, "1", FloatingText.STRENGTH);
+
+		CellEmitter.get(hero.pos).start(ShaftParticle.FACTORY, 0.2f, 3);
 
 		detach(curUser.belongings.backpack);
 		curUser.spend(1f);
@@ -58,7 +64,6 @@ public class FieldOperatorAncientRune extends AncientRune {
 		(curUser.sprite).operate(curUser.pos);
 		Invisibility.dispel();
 	}
-
 
 	@Override
 	public int value() {

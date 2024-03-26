@@ -84,7 +84,7 @@ public enum Rankings {
 		Record rec = new Record();
 
 		//we trim version to just the numbers, ignoring alpha/beta, etc.
-		Pattern p = Pattern.compile("\\d+\\.\\d+\\.\\d+");
+		Pattern p = Pattern.compile("\\d+\\.\\d+\\.\\d+T\\d+\\.\\d+");
 		Matcher m = p.matcher(ShatteredPixelDungeon.version);
 		if (m.find()) {
 			rec.version = "v" + m.group();

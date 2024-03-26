@@ -55,8 +55,6 @@ public class IceShot extends TargetedSpell {
 			cell = bolt.path.get(bolt.dist - 1);
 		}
 
-		
-
 		if (ch != null) {
 			if (Dungeon.level.water[cell] && !ch.isImmune(Freezing.class)) {
 				Buff.affect(ch, Frost.class, 2f);

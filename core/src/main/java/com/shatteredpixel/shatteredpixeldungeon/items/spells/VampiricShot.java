@@ -27,6 +27,8 @@ package com.shatteredpixel.shatteredpixeldungeon.items.spells;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Bleeding;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.effects.FloatingText;
 import com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica;
@@ -55,10 +57,15 @@ public class VampiricShot extends TargetedSpell {
 
 			heal = Math.min(heal, hero.HT - hero.HP);
 
-			if (!ch.properties().contains(Char.Property.INORGANIC)) {
-				ch.damage(dmg, this);
-				hero.HP += heal;
-				hero.sprite.showStatusWithIcon( CharSprite.POSITIVE, Integer.toString( heal ), FloatingText.HEALING );
+			ch.damage(dmg, this);
+
+			if (!ch.isImmune(Bleeding.class)) {
+				if (heal > 0) {
+					hero.HP += heal;
+					hero.sprite.showStatusWithIcon( CharSprite.POSITIVE, Integer.toString( heal ), FloatingText.HEALING );
+				}
+
+				if(ch.isAlive()) Buff.affect(ch, Bleeding.class).set(1);
 			}
 		}
 

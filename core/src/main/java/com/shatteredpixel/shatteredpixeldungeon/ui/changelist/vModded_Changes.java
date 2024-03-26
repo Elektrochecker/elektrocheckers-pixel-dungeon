@@ -25,9 +25,14 @@
 package com.shatteredpixel.shatteredpixeldungeon.ui.changelist;
 
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CrackedGeode;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.FlameShot;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.IceShot;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.MagicBridge;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.PrismaticImageSpell;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.Transfiguration;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.VampiricShot;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.VenomShot;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Corroding;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dirk;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
@@ -51,6 +56,32 @@ public class vModded_Changes {
 		changes.hardlight(0x10e3a7);
 		changeInfos.add(changes);
 
+		changes = new ChangeInfo("v2.3.2T4.2", false, null);
+		changes.hardlight(Window.TITLE_COLOR);
+		changeInfos.add(changes);
+
+		changes.addButton(new ChangeButton(Icons.get(Icons.PREFS), Messages.get(ChangesScene.class, "misc"),
+				"_-_Cleaned up some no longer fitting scenes and messages from shattered pixel dungeon.\n\n" +
+				"_-_Minor changes to the textures of existing artifacts and floor tiles.\n\n" +
+				"_-_The ancient rune of the field now also grants 1 point of strength in addition to its other effects."
+		));
+
+		changes.addButton(new ChangeButton(new Image(Assets.Sprites.SPINNER, 144, 0, 16, 16), Messages.get(ChangesScene.class, "bugfixes"),
+			"_-_fixed a bug where the game version displayed in rankings did not include the TX.X suffix."
+		));
+
+		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.ARTIFACT_GEODE), "Cracked Geode",
+				Messages.get(CrackedGeode.class, "desc")
+		));
+
+		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.FLAME_SHOT), "Spells",
+				"The following spells have been added:\n\n" +
+				"_-_" + Messages.get(FlameShot.class, "name") + "\n" +
+				"_-_" + Messages.get(IceShot.class, "name") + "\n" +
+				"_-_" + Messages.get(VenomShot.class, "name") + "\n" +
+				"_-_" + Messages.get(VampiricShot.class, "name")
+		));
+
 		changes = new ChangeInfo("v2.3.2T4.1", false, null);
 		changes.hardlight(Window.TITLE_COLOR);
 		changeInfos.add(changes);
@@ -69,15 +100,13 @@ public class vModded_Changes {
 		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.ANCIENTRUNE_EXISTENCE), "Ancient Runes",
 		"The following ancient runes were added in this patch:\n\n" +
 		"_-_Ancient Rune of Existence\n" +
-		"_-_Ancient Rune of Propagation\n"
+		"_-_Ancient Rune of Propagation"
 		));
 		
 		changes.addButton( new ChangeButton(new ItemSprite(new Dirk().enchant(new Corroding())), "Corroding Enchantment",
 				"This powerful enchantment injects corrosive chemicals into the enemy, inflicting corrosion..\n\n" +
 				"An elemental strike with a corroding enchantment spreads corrosive gas to the affected area."
 		));
-
-		//new spell
 
 		changes = new ChangeInfo("v2.3.2T4.0", false, null);
 		changes.hardlight(Window.TITLE_COLOR);
@@ -228,6 +257,10 @@ public class vModded_Changes {
 
 		ChangeInfo changes = new ChangeInfo("v.T2", true, "");
 		changes.hardlight(0x10e3a7);
+		changeInfos.add(changes);
+
+		changes = new ChangeInfo("new content", false, null);
+		changes.hardlight(Window.TITLE_COLOR);
 		changeInfos.add(changes);
  
 		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.WAND_COSMOS), "Wand of cosmic travel",
